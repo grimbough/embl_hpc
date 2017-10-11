@@ -5,5 +5,5 @@ n=40
 for i in `seq -w 1 ${n}`
 do
   echo $i;
-  userdel -rf test${i}
+  userdel -rf user${i}
 done;
