@@ -1,5 +1,6 @@
 #!/bin/bash
-## script to create 40 users called userXX with a default password
+## Run this on each compute node
+## script creates 40 users called userXX with a default password
 ## and setup up ssh logins without asking for passwords & host checking
 
 n=40
