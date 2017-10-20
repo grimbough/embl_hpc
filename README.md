@@ -1,3 +1,11 @@
+# Intro
+
+Teaching material used during the High Performance Computing session of the EMBL Software Carpentry course.
+
+# Commands
+
+Below are most of the commands used during the practical, so they can be copy/pasted, but I highly recommend typing along if you can.
+
 ## Identifying our computer
 
 ```
