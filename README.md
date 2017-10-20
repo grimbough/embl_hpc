@@ -34,19 +34,19 @@ srun ./hpc_example.py -t 10 -l 100
 ## Running in the background
 
 ```
-srun ./hpc_example.py -t 10 -l 100 &
+sbatch ./hpc_example.py -t 10 -l 100
 ```
 
 ## Redirecting output
 
 ```
-srun --output=output.txt ./hpc_example.py -t 20 -l 100 &
+sbatch --output=output.txt ./hpc_example.py -t 20 -l 100
 ```
 
 ## Creating a larger list
 
 ```
-srun --output=output.txt ./hpc_example.py -t 30 -l 5000000 &
+sbatch --output=output.txt ./hpc_example.py -t 30 -l 5000000
 ```
 
 ## Displaying details of our cluster queue
@@ -58,9 +58,17 @@ scontrol show partition
 ## Requesting more resources
 
 ```
-srun --mem=250 \
+sbatch --mem=250 \
 --output=output.txt \
-./hpc_example.py -t 30 -l 5000000 &
+./hpc_example.py -t 30 -l 5000000
+```
+
+## Requesting a lot more resources
+
+```
+sbatch --mem=8000 \
+--output=output.txt \
+./hpc_example.py -t 120 -l 5000000
 ```
 
 ## Running interactive jobs
