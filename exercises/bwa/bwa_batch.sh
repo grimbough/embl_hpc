@@ -1,14 +1,16 @@
 #!/bin/bash
-#SBATCH -t 00:06:00
-#SBATCH --mem=150
+#SBATCH --time=00:06:00
+#SBATCH --mem=4000
 #SBATCH --nodes=1
+#SBATCH --output=bwa.out
+#SBATCH --open-mode=append
 
 ## load required modules
 module load SAMtools BWA
 
-## copy data to /scratch and change directory
-cp /g/huber/users/msmith/embl_hpc/Ecoli_genome.fa.gz /g/huber/users/msmith/embl_hpc/reads_*.fq.gz $SCRATCHDIR 
-cd $SCRATCHDIR
+## copy data to /tmp and change directory
+cp /g/huber/users/msmith/embl_hpc/Ecoli_genome.fa.gz /g/huber/users/msmith/embl_hpc/reads_*.fq.gz $TMPDIR 
+cd $TMPDIR
 
 ## create an index
 bwa index -p ecoli Ecoli_genome.fa.gz 
