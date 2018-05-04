@@ -1,19 +1,23 @@
 #!/bin/bash
-#SBATCH -t 00:15:00
+#SBATCH -t 00:06:00
 #SBATCH --mem=150
 #SBATCH --nodes=1
 
+## load required modules
+module load SAMtools BWA
+
 ## copy data to /scratch and change directory
-cp reference.fa reads.txt $SCRATCHDIR && cd $SCRATCHDIR
+cp /g/huber/users/msmith/embl_hpc/Ecoli_genome.fa.gz /g/huber/users/msmith/embl_hpc/reads_*.fq.gz $SCRATCHDIR 
+cd $SCRATCHDIR
 
 ## create an index
-bwa index reference.fa
+bwa index -p ecoli Ecoli_genome.fa.gz 
 
 ## perform alignment
-bwa aln -I reference.fa reads.txt > out.sai
+bwa mem ecoli reads_1.fq.gz reads_2.fq.gz > aligned.sam
 
-## create SAM file
-bwa samse reference.fa out.sai reads.txt > out.sam
+## create a compressed BAM file
+samtools view -b aligned.sam > aligned.bam
 
 ## copy results back
-cp out.sam $HOME/embl_hpc/exercises/bwa/
+cp aligned.bam $HOME/embl_hpc/exercises/bwa/
