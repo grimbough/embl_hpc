@@ -1,14 +1,18 @@
 #!/bin/bash
-#SBATCH --time=00:06:00
-#SBATCH --mem=4000
+#SBATCH --time=00-00:06:00
+#SBATCH --mem=4000M
 #SBATCH --nodes=1
+#SBATCH --tmp=1G
+#SBATCH --gres=tmp:1G
 #SBATCH --output=bwa.out
 #SBATCH --open-mode=append
 
 ## load required modules
 module load SAMtools BWA
 
-## copy data to /tmp and change directory
+## record current location, copy data to /tmp and change directory to /tmp
+WORKING_DIR=`pwd`
+echo $WORKING_DIR
 cp /g/huber/users/msmith/embl_hpc/Ecoli_genome.fa.gz /g/huber/users/msmith/embl_hpc/reads_*.fq.gz $TMPDIR 
 cd $TMPDIR
 
@@ -22,4 +26,4 @@ bwa mem ecoli reads_1.fq.gz reads_2.fq.gz > aligned.sam
 samtools view -b aligned.sam > aligned.bam
 
 ## copy results back
-cp aligned.bam $HOME/embl_hpc/exercises/bwa/
+cp aligned.bam $WORKING_DIR/
